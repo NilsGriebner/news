@@ -498,12 +498,12 @@
     <field>
         <name>bytes_allowed</name>
         <type>integer</type>
-        <notnull>true</notnull>
+        <notnull>false</notnull>
     </field>
         <field>
             <name>expiry_days</name>
             <type>integer</type>
-            <notnull>true</notnull>
+            <notnull>false</notnull>
         </field>
     </declaration>
     </table>

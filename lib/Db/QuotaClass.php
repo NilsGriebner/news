@@ -20,9 +20,9 @@ class QuotaClass extends Entity implements \JsonSerializable {
     protected $name;
     /** @var string */
     protected $description;
-    /** @var int */
+    /** @var int|null */
     protected $bytesAllowed;
-    /** @var int */
+    /** @var int|null */
     protected $expiryDays;
 
     public function getId() {
