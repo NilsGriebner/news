@@ -450,7 +450,7 @@
         </declaration>
     </table>
     <table>
-    <name>*dbprefix*news_quota__mappings</name>
+    <name>*dbprefix*news_quota_mappings</name>
     <declaration>
     <field>
         <name>id</name>
