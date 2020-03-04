@@ -1,4 +1,13 @@
 <?php
+/**
+ * Nextcloud - News
+ *
+ * This file is licensed under the Affero General Public License version 3 or
+ * later. See the COPYING file.
+ *
+ * @author    Nils Griebner <nils@nils-griebner.de>
+ * @copyright 2020 Nils Griebner
+ */
 namespace OCA\News\Db;
 
 use OCP\AppFramework\Db\Entity;
