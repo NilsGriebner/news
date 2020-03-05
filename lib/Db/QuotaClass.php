@@ -87,7 +87,7 @@ class QuotaClass extends Entity implements \JsonSerializable {
             'name' => $this->name,
             'description' => $this->description,
             'bytesAllowed' => $this->bytesAllowed,
-            'expiryDate' => $this->expiryDays
+            'expiryDays' => $this->expiryDays
         ];
     }
 }
