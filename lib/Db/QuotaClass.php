@@ -18,7 +18,7 @@ class QuotaClass extends Entity implements \JsonSerializable {
     protected $id;
     /** @var string */
     protected $name;
-    /** @var string */
+    /** @var string|null */
     protected $description;
     /** @var int|null */
     protected $bytesAllowed;
