@@ -9,7 +9,7 @@
  * @copyright 2020 Nils Griebner
  */
 
-namespace Service;
+namespace OCA\News\Service;
 
 use OCA\News\Db\QuotaMappingMapper;
 use OCA\News\Db\QuotaMapping;
@@ -27,6 +27,11 @@ class QuotaMappingService
         return $this->mapper->findAll();
     }
 
+    public function find($id)
+    {
+        return $this->mapper->find($id);
+    }
+
     public function create($uid, $qid)
     {
         //FIX-ME Validate input, catch exceptions
@@ -35,7 +40,7 @@ class QuotaMappingService
         $quotaClass->setUid($uid);
         $quotaClass->setQid($qid);
 
-        $this->mapper->insert($quotaClass);
+        return $this->mapper->insert($quotaClass);
 
     }
 
@@ -43,7 +48,7 @@ class QuotaMappingService
     {
         //FIX-ME Validate input, catch exceptions
 
-        $this->mapper->delete($id);
+        return $this->mapper->delete($id);
     }
 
     public function update($id, $uid, $qid)
@@ -55,7 +60,7 @@ class QuotaMappingService
         $quotaClass->setUid($uid);
         $quotaClass->setQid($qid);
 
-        $this->mapper->update($quotaClass);
+        return $this->mapper->update($quotaClass);
 
     }
 }

@@ -9,7 +9,7 @@
  * @copyright 2020 Nils Griebner
  */
 
-namespace Service;
+namespace OCA\News\Service;
 
 use OCA\News\Db\QuotaClassMapper;
 use OCA\News\Db\QuotaClass;
@@ -27,6 +27,11 @@ class QuotaClassService
         return $this->mapper->findAll();
     }
 
+    public function find($id)
+    {
+        return $this->mapper->find($id);
+    }
+
     public function create($name, $description, $bytesAllowed, $expiryDays)
     {
         //FIX-ME Validate input, catch exceptions
@@ -37,7 +42,7 @@ class QuotaClassService
         $quotaClass->setBytesAllowed($bytesAllowed);
         $quotaClass->setExpiryDays($expiryDays);
 
-        $this->mapper->insert($quotaClass);
+        return $this->mapper->insert($quotaClass);
 
     }
 
@@ -45,7 +50,7 @@ class QuotaClassService
     {
         //FIX-ME Validate input, catch exceptions
 
-        $this->mapper->delete($id);
+        return $this->mapper->delete($id);
     }
 
     public function update($id, $name, $description, $bytesAllowed, $expiryDays)
@@ -59,7 +64,7 @@ class QuotaClassService
         $quotaClass->setBytesAllowed($bytesAllowed);
         $quotaClass->setExpiryDays($expiryDays);
 
-        $this->mapper->update($quotaClass);
+        return $this->mapper->update($quotaClass);
 
     }
 }
