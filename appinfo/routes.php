@@ -55,6 +55,20 @@ return ['routes' => [
 ['name' => 'export#opml', 'url' => '/export/opml', 'verb' => 'GET'],
 ['name' => 'export#articles', 'url' => '/export/articles', 'verb' => 'GET'],
 
+// quotaclass
+['name' => 'quotaclass#index', 'url' => '/quotaclass', 'verb' => 'GET'],
+['name' => 'quotaclass#show', 'url' => '/quotaclass/{id}', 'verb' => 'GET'],
+['name' => 'quotaclass#create', 'url' => '/quotaclass', 'verb' => 'POST'],
+['name' => 'quotaclass#update', 'url' => '/quotaclass/{id}', 'verb' => 'POST'],
+['name' => 'quotaclass#delete', 'url' => '/quotaclass/{id}', 'verb' => 'DELETE'],
+
+// quotamapping
+['name' => 'quotamapping#index', 'url' => '/quotamapping', 'verb' => 'GET'],
+['name' => 'quotamapping#show', 'url' => '/quotamapping/{id}', 'verb' => 'GET'],
+['name' => 'quotamapping#create', 'url' => '/quotamapping', 'verb' => 'POST'],
+['name' => 'quotamapping#update', 'url' => '/quotamapping/{id}', 'verb' => 'POST'],
+['name' => 'quotamapping#delete', 'url' => '/quotamapping/{id}', 'verb' => 'DELETE'],
+
 // general API
 ['name' => 'api#index', 'url' => '/api', 'verb' => 'GET'],
 
@@ -97,5 +111,19 @@ return ['routes' => [
 ['name' => 'item_api#unstar', 'url' => '/api/v1-2/items/{feedId}/{guidHash}/unstar', 'verb' => 'PUT'], // FIXME: POST would be more correct
 ['name' => 'item_api#star_multiple', 'url' => '/api/v1-2/items/star/multiple', 'verb' => 'PUT'], // FIXME: POST would be more correct
 ['name' => 'item_api#unstar_multiple', 'url' => '/api/v1-2/items/unstar/multiple', 'verb' => 'PUT'], // FIXME: POST would be more correct
+
+// quotaclass
+['name' => 'quotaclass_api#index', 'url' => '/api/v1-2/quotaclass', 'verb' => 'GET'],
+['name' => 'quotaclass_api#show', 'url' => '/api/v1-2/quotaclass/{id}', 'verb' => 'GET'],
+['name' => 'quotaclass_api#create', 'url' => '/api/v1-2/quotaclass', 'verb' => 'POST'],
+['name' => 'quotaclass_api#update', 'url' => '/api/v1-2/quotaclass/{id}', 'verb' => 'PUT'],
+['name' => 'quotaclass_api#delete', 'url' => '/api/v1-2/quotaclass/{folderId}', 'verb' => 'DELETE'],
+
+// quotamapping
+['name' => 'quotamapping_api#index', 'url' => '/api/v1-2/quotamapping', 'verb' => 'GET'],
+['name' => 'quotamapping_api#show', 'url' => '/api/v1-2/quotamapping/{id}', 'verb' => 'GET'],
+['name' => 'quotamapping_api#create', 'url' => '/api/v1-2/quotamapping', 'verb' => 'POST'],
+['name' => 'quotamapping_api#update', 'url' => '/api/v1-2/quotamapping/{id}', 'verb' => 'PUT'],
+['name' => 'quotamapping_api#delete', 'url' => '/api/v1-2/quotamapping/{folderId}', 'verb' => 'DELETE'],
 
 ]];
