@@ -13,7 +13,8 @@ namespace OCA\News\Db;
 
 use OCP\AppFramework\Db\Entity;
 
-class QuotaMapping extends Entity implements \JsonSerializable {
+class QuotaMapping extends Entity implements \JsonSerializable
+{
 
     /** @var int */
     protected $uid;
@@ -24,25 +25,31 @@ class QuotaMapping extends Entity implements \JsonSerializable {
         return $this->uid;
     }
 
-    public function setUid($uid): void {
-        if ($this->uid !== $uid) {
+    public function setUid($uid): void
+    {
+        if ($this->uid !== $uid)
+        {
             $this->uid = $uid;
             $this->markFieldUpdated('uid');
         }
     }
 
-    public function getQid() {
+    public function getQid()
+    {
         return $this->qid;
     }
 
-    public function setQid($qid): void {
-        if ($this->qid !== $qid) {
+    public function setQid($qid): void
+    {
+        if ($this->qid !== $qid)
+        {
             $this->qid = $qid;
             $this->markFieldUpdated('qid');
         }
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize()
+    {
         return [
             'id' => $this->id,
             'uid' => $this->uid,

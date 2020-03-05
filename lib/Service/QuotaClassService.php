@@ -18,7 +18,8 @@ class QuotaClassService
 {
     private $mapper;
 
-    public function __construct(QuotaClassMapper $mapper) {
+    public function __construct(QuotaClassMapper $mapper)
+    {
         $this->mapper = $mapper;
     }
 
@@ -32,9 +33,22 @@ class QuotaClassService
         return $this->mapper->find($id);
     }
 
+    /**
+     * @param $name
+     * @param $description
+     * @param $bytesAllowed
+     * @param $expiryDays
+     * @return \OCP\AppFramework\Db\Entity
+     * @throws ServiceConflictException
+     */
     public function create($name, $description, $bytesAllowed, $expiryDays)
     {
-        //FIX-ME Validate input, catch exceptions
+        $existingQuotaClass = $this->mapper->findByName($name);
+        if (count($existingQuotaClass) > 0)
+        {
+            throw new ServiceConflictException(
+                "Quota class with name already exists!");
+        }
 
         $quotaClass = new QuotaClass();
         $quotaClass->setName($name);
@@ -48,15 +62,11 @@ class QuotaClassService
 
     public function delete($id)
     {
-        //FIX-ME Validate input, catch exceptions
-
         return $this->mapper->delete($id);
     }
 
     public function update($id, $name, $description, $bytesAllowed, $expiryDays)
     {
-        // FIX-ME Validate input, catch exceptions
-
         $quotaClass = new QuotaClass();
         $quotaClass->setId($id);
         $quotaClass->setName($name);

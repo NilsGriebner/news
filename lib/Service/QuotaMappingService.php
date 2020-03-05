@@ -18,7 +18,8 @@ class QuotaMappingService
 {
     private $mapper;
 
-    public function __construct(QuotaMappingMapper $mapper) {
+    public function __construct(QuotaMappingMapper $mapper)
+    {
         $this->mapper = $mapper;
     }
 
@@ -32,29 +33,35 @@ class QuotaMappingService
         return $this->mapper->find($id);
     }
 
+    /**
+     * @param $uid
+     * @param $qid
+     * @return \OCP\AppFramework\Db\Entity
+     * @throws ServiceConflictException
+     */
     public function create($uid, $qid)
     {
-        //FIX-ME Validate input, catch exceptions
+        $existingQuotaMapping = $this->mapper->findByUid($uid);
+        if (count($existingQuotaMapping) > 0)
+        {
+            throw new ServiceConflictException("Quota mapping for user exists!");
+        }
 
-        $quotaClass = new QuotaMapping();
-        $quotaClass->setUid($uid);
-        $quotaClass->setQid($qid);
+        $quotaMapping = new QuotaMapping();
+        $quotaMapping->setUid($uid);
+        $quotaMapping->setQid($qid);
 
-        return $this->mapper->insert($quotaClass);
+        return $this->mapper->insert($quotaMapping);
 
     }
 
     public function delete($id)
     {
-        //FIX-ME Validate input, catch exceptions
-
         return $this->mapper->delete($id);
     }
 
     public function update($id, $uid, $qid)
     {
-        // FIX-ME Validate input, catch exceptions
-
         $quotaClass = new QuotaMapping();
         $quotaClass->setId($id);
         $quotaClass->setUid($uid);

@@ -45,4 +45,12 @@ class QuotaClassMapper extends Mapper
 
         return $this->execute($sql, [$id]);
     }
+
+    public function findByName($name)
+    {
+        $sql = 'SELECT * FROM `*PREFIX*news_quota_classes`' .
+            'WHERE `name` = ?';
+
+        return $this->findEntities($sql, [$name]);
+    }
 }

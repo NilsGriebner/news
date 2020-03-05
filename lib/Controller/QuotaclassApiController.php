@@ -11,12 +11,16 @@
 
 namespace OCA\News\Controller;
 
+use OCA\News\Service\ServiceConflictException;
+use OCP\AppFramework\Http;
 use OCP\IRequest;
 use OCP\AppFramework\ApiController;
 
 use OCA\News\Service\QuotaClassService;
 
-class QuotaclassApiController extends ApiController {
+class QuotaclassApiController extends ApiController
+{
+    use JSONHttpError;
 
     private $service;
     private $userId;
@@ -63,8 +67,15 @@ class QuotaclassApiController extends ApiController {
      */
     public function create($name, $description, $bytesAllowed, $expiryDays)
     {
-        return $this->service->create($name,
-            $description, $bytesAllowed, $expiryDays);
+        try
+        {
+            return $this->service->create($name,
+                $description, $bytesAllowed, $expiryDays);
+        } catch (ServiceConflictException $e)
+        {
+            return $this->error($e ,Http::STATUS_CONFLICT);
+        }
+
     }
 
     /**

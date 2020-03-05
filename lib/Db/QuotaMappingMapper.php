@@ -11,7 +11,6 @@
 
 namespace OCA\News\Db;
 
-use OCA\News\Db\QuotaMapping;
 use OCP\AppFramework\Db\Mapper;
 use OCP\IDBConnection;
 
@@ -37,6 +36,14 @@ class QuotaMappingMapper extends Mapper
         $sql = 'SELECT * FROM `*PREFIX*news_quota_mappings`' ;
 
         return $this->findEntities($sql);
+    }
+
+    public function findByUid($id)
+    {
+        $sql = 'SELECT * FROM `*PREFIX*news_quota_mappings`' .
+            'WHERE `uid` = ?';
+
+        return $this->findEntities($sql, [$id]);
     }
 
     public function delete($id)

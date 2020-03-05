@@ -12,11 +12,15 @@
 namespace OCA\News\Controller;
 
 use OCA\News\Service\QuotaMappingService;
+use OCA\News\Service\ServiceConflictException;
+use OCP\AppFramework\Http;
 use OCP\IRequest;
 use OCP\AppFramework\ApiController;
 
 
-class QuotamappingApiController extends ApiController {
+class QuotamappingApiController extends ApiController
+{
+    use JSONHttpError;
 
     private $service;
     private $userId;
@@ -61,7 +65,14 @@ class QuotamappingApiController extends ApiController {
      */
     public function create($uid, $qid)
     {
-        return $this->service->create($uid,$qid);
+        try
+        {
+            return $this->service->create($uid, $qid);
+
+        } catch (ServiceConflictException $e)
+        {
+            return $this->error($e, Http::STATUS_CONFLICT);
+        }
     }
 
     /**
@@ -89,5 +100,4 @@ class QuotamappingApiController extends ApiController {
     {
         return $this->service->delete($id);
     }
-
 }

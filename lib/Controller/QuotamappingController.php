@@ -11,7 +11,9 @@
 
 namespace OCA\News\Controller;
 
+use OCA\News\Service\ServiceConflictException;
 use OCP\IRequest;
+use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Controller;
 
@@ -19,6 +21,7 @@ use OCA\News\Service\QuotaMappingService;
 
 class QuotamappingController extends Controller
 {
+    use JSONHttpError;
 
     private $service;
     private $userId;
@@ -60,7 +63,14 @@ class QuotamappingController extends Controller
      */
     public function create(string $uid, int $qid)
     {
-        return $this->service->create($uid, $qid);
+        try
+        {
+            return $this->service->create($uid, $qid);
+
+        } catch (ServiceConflictException $e)
+        {
+            return $this->error($e, Http::STATUS_CONFLICT);
+        }
     }
 
     /**

@@ -11,6 +11,8 @@
 
 namespace OCA\News\Controller;
 
+use OCA\News\Service\ServiceConflictException;
+use OCP\AppFramework\Http;
 use OCP\IRequest;
 use OCP\AppFramework\Controller;
 
@@ -18,6 +20,7 @@ use OCA\News\Service\QuotaClassService;
 
 class QuotaclassController extends Controller
 {
+    use JSONHttpError;
 
     private $service;
     private $userId;
@@ -61,8 +64,14 @@ class QuotaclassController extends Controller
                            int $bytesAllowed,
                            int $expiryDays)
     {
-        return $this->service->create($name,
-            $description, $bytesAllowed, $expiryDays);
+        try
+        {
+            return $this->service->create($name,
+                $description, $bytesAllowed, $expiryDays);
+        } catch (ServiceConflictException $e)
+        {
+            return $this->error($e ,Http::STATUS_CONFLICT);
+        }
     }
 
     /**
