@@ -16,7 +16,7 @@ use OCP\AppFramework\ApiController;
 
 use OCA\News\Service\QuotaClassService;
 
-class QuotaClassApiController extends ApiController {
+class QuotaclassApiController extends ApiController {
 
     private $service;
     private $userId;

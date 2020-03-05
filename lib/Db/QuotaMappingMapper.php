@@ -46,10 +46,4 @@ class QuotaMappingMapper extends Mapper
 
         return $this->execute($sql, [$id]);
     }
-
-    public function insert($entity)
-    {
-        // FIX-ME We should check for existing mappings
-        return $this->insert($entity);
-    }
 }

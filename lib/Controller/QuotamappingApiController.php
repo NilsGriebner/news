@@ -16,7 +16,7 @@ use OCP\IRequest;
 use OCP\AppFramework\ApiController;
 
 
-class QuotaMappingApiController extends ApiController {
+class QuotamappingApiController extends ApiController {
 
     private $service;
     private $userId;

@@ -16,7 +16,7 @@ use OCP\AppFramework\Controller;
 
 use OCA\News\Service\QuotaClassService;
 
-class QuotaClassController extends Controller
+class QuotaclassController extends Controller
 {
 
     private $service;
@@ -31,6 +31,7 @@ class QuotaClassController extends Controller
 
     /**
      * @NoAdminRequired
+     * @NoCSRFRequired
      */
     public function index()
     {
@@ -39,7 +40,7 @@ class QuotaClassController extends Controller
 
     /**
      * @NoAdminRequired
-     *
+     * @NoCSRFRequired
      * @param int $id
      */
     public function show(int $id)
@@ -49,7 +50,7 @@ class QuotaClassController extends Controller
 
     /**
      * @NoAdminRequired
-     *
+     * @NoCSRFRequired
      * @param string $name
      * @param string $description
      * @param int $bytesAllowed
@@ -66,7 +67,7 @@ class QuotaClassController extends Controller
 
     /**
      * @NoAdminRequired
-     *
+     * @NoCSRFRequired
      * @param int $id
      * @param string $name
      * @param string $description
@@ -84,6 +85,7 @@ class QuotaClassController extends Controller
 
     /**
      * @NoAdminRequired
+     * @NoCSRFRequired
      *
      * @param int $id
      */

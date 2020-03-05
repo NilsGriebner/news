@@ -1,40 +1,18 @@
 <?php
-/**
- * Nextcloud - News
- *
- * This file is licensed under the Affero General Public License version 3 or
- * later. See the COPYING file.
- *
- * @author    Nils Griebner <nils@nils-griebner.de>
- * @copyright 2020 Nils Griebner
- */
 namespace OCA\News\Db;
 
 use OCP\AppFramework\Db\Entity;
 
 class QuotaClass extends Entity implements \JsonSerializable {
 
-    /** @var int */
-    protected $id;
     /** @var string */
     protected $name;
-    /** @var string|null */
+    /** @var string */
     protected $description;
-    /** @var int|null */
+    /** @var int */
     protected $bytesAllowed;
-    /** @var int|null */
+    /** @var int */
     protected $expiryDays;
-
-    public function getId() {
-        return $this->id;
-    }
-
-    public function setId( int $id): void {
-        if ($this->id !== $id) {
-            $this->id = $id;
-            $this->markFieldUpdated('id');
-        }
-    }
 
     public function getName() {
         return $this->name;
@@ -77,6 +55,7 @@ class QuotaClass extends Entity implements \JsonSerializable {
         if ($this->expiryDays !== $expiryDays) {
             $this->expiryDays = $expiryDays;
             $this->markFieldUpdated('expiryDays');
+
         }
     }
 

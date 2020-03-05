@@ -17,7 +17,7 @@ use OCP\AppFramework\Controller;
 
 use OCA\News\Service\QuotaMappingService;
 
-class QuotaMappingController extends Controller
+class QuotamappingController extends Controller
 {
 
     private $service;
@@ -32,6 +32,7 @@ class QuotaMappingController extends Controller
     }
 
     /**
+     * @NoCSRFRequired
      * @NoAdminRequired
      */
     public function index()
@@ -40,6 +41,7 @@ class QuotaMappingController extends Controller
     }
 
     /**
+     * @NoCSRFRequired
      * @NoAdminRequired
      *
      * @param int $id
@@ -51,6 +53,7 @@ class QuotaMappingController extends Controller
 
     /**
      * @NoAdminRequired
+     * @NoCSRFRequired
      *
      * @param string $uid
      * @param int $qid
@@ -62,6 +65,7 @@ class QuotaMappingController extends Controller
 
     /**
      * @NoAdminRequired
+     * @NoCSRFRequired
      *
      * @param int $id
      * @param string $uid
@@ -76,6 +80,7 @@ class QuotaMappingController extends Controller
 
     /**
      * @NoAdminRequired
+     * @NoCSRFRequired
      *
      * @param int $id
      */

@@ -16,22 +16,9 @@ use OCP\AppFramework\Db\Entity;
 class QuotaMapping extends Entity implements \JsonSerializable {
 
     /** @var int */
-    protected $id;
-    /** @var int */
     protected $uid;
     /** @var int */
     protected $qid;
-
-    public function getId() {
-        return $this->id;
-    }
-
-    public function setId( int $id): void {
-        if ($this->id !== $id) {
-            $this->id = $id;
-            $this->markFieldUpdated('id');
-        }
-    }
 
     public function getUid() {
         return $this->uid;
