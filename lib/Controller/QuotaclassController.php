@@ -11,7 +11,6 @@
 
 namespace OCA\News\Controller;
 
-use OCA\Files_External\NotFoundException;
 use OCA\News\Service\ServiceConflictException;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
@@ -26,10 +25,9 @@ class QuotaclassController extends Controller
     use JSONHttpError;
 
     private $service;
-    private $userId;
 
     public function __construct(string $AppName, IRequest $request,
-                                QuotaClassService $service, $UserId)
+                                QuotaClassService $service)
     {
         parent::__construct($AppName, $request);
         $this->service = $service;

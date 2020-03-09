@@ -26,14 +26,12 @@ class QuotamappingController extends Controller
     use JSONHttpError;
 
     private $service;
-    private $userId;
 
     public function __construct(string $AppName, IRequest $request,
-                                QuotaMappingService $service, $UserId)
+                                QuotaMappingService $service)
     {
         parent::__construct($AppName, $request);
         $this->service = $service;
-        $this->userId = $UserId;
     }
 
     /**
