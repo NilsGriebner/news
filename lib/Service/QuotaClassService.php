@@ -13,6 +13,9 @@ namespace OCA\News\Service;
 
 use OCA\News\Db\QuotaClassMapper;
 use OCA\News\Db\QuotaClass;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\Entity;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 
 class QuotaClassService
 {
@@ -28,6 +31,12 @@ class QuotaClassService
         return $this->mapper->findAll();
     }
 
+    /**
+     * @param $id
+     * @return Entity
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     */
     public function find($id)
     {
         return $this->mapper->find($id);
@@ -38,31 +47,45 @@ class QuotaClassService
      * @param $description
      * @param $bytesAllowed
      * @param $expiryDays
-     * @return \OCP\AppFramework\Db\Entity
+     * @return Entity
      * @throws ServiceConflictException
      */
     public function create($name, $description, $bytesAllowed, $expiryDays)
     {
-        $existingQuotaClass = $this->mapper->findByName($name);
-        if (count($existingQuotaClass) > 0)
+        $exceptionMessage = "Quota class with name already exists!";
+        try
         {
-            throw new ServiceConflictException(
-                "Quota class with name already exists!");
+            $existingQuotaClass = $this->mapper->findByName($name);
+
+            if ($existingQuotaClass !== null)
+            {
+                throw new ServiceConflictException($exceptionMessage);
+            }
+        } catch (DoesNotExistException $e)
+        {
+            $quotaClass = new QuotaClass();
+            $quotaClass->setName($name);
+            $quotaClass->setDescription($description);
+            $quotaClass->setBytesAllowed($bytesAllowed);
+            $quotaClass->setExpiryDays($expiryDays);
+
+            return $this->mapper->insert($quotaClass);
+
+        } catch (MultipleObjectsReturnedException $e) {
+            throw new ServiceConflictException($exceptionMessage);
         }
-
-        $quotaClass = new QuotaClass();
-        $quotaClass->setName($name);
-        $quotaClass->setDescription($description);
-        $quotaClass->setBytesAllowed($bytesAllowed);
-        $quotaClass->setExpiryDays($expiryDays);
-
-        return $this->mapper->insert($quotaClass);
-
     }
 
+    /**
+     * @param $id
+     * @return Entity
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
+     */
     public function delete($id)
     {
-        return $this->mapper->delete($id);
+        $quotaClass = $this->find($id);
+        return $this->mapper->delete($quotaClass);
     }
 
     public function update($id, $name, $description, $bytesAllowed, $expiryDays)

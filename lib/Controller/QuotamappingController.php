@@ -12,6 +12,8 @@
 namespace OCA\News\Controller;
 
 use OCA\News\Service\ServiceConflictException;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\IRequest;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\DataResponse;
@@ -96,6 +98,15 @@ class QuotamappingController extends Controller
      */
     public function destroy(int $id)
     {
-        return $this->service->delete($id);
+        try
+        {
+            return $this->service->delete($id);
+        } catch (DoesNotExistException $e)
+        {
+            return $this->error($e, Http::STATUS_NOT_FOUND);
+        } catch (MultipleObjectsReturnedException $e)
+        {
+            return $this->error($e,http::STATUS_CONFLICT);
+        }
     }
 }

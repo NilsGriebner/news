@@ -11,7 +11,10 @@
 
 namespace OCA\News\Controller;
 
+use OCA\Files_External\NotFoundException;
 use OCA\News\Service\ServiceConflictException;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Http;
 use OCP\IRequest;
 use OCP\AppFramework\Controller;
@@ -48,7 +51,16 @@ class QuotaclassController extends Controller
      */
     public function show(int $id)
     {
-        return $this->service->find($id);
+        try
+        {
+            return $this->service->find($id);
+        } catch (DoesNotExistException $e)
+        {
+           return $this->error($e, Http::STATUS_NOT_FOUND);
+        } catch (MultipleObjectsReturnedException $e)
+        {
+            return $this->error($e, Http::STATUS_CONFLICT);
+        }
     }
 
     /**
@@ -100,6 +112,15 @@ class QuotaclassController extends Controller
      */
     public function destroy(int $id)
     {
-        return $this->service->delete($id);
+        try
+        {
+            return $this->service->delete($id);
+        } catch (DoesNotExistException $e)
+        {
+            return $this->error($e, Http::STATUS_NOT_FOUND);
+        } catch (MultipleObjectsReturnedException $e)
+        {
+            return $this->error($e,http::STATUS_CONFLICT);
+        }
     }
 }

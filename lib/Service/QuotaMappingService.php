@@ -13,6 +13,9 @@ namespace OCA\News\Service;
 
 use OCA\News\Db\QuotaMappingMapper;
 use OCA\News\Db\QuotaMapping;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\Entity;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 
 class QuotaMappingService
 {
@@ -28,6 +31,12 @@ class QuotaMappingService
         return $this->mapper->findAll();
     }
 
+    /**
+     * @param $id
+     * @return Entity
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
+     */
     public function find($id)
     {
         return $this->mapper->find($id);
@@ -36,7 +45,7 @@ class QuotaMappingService
     /**
      * @param $uid
      * @param $qid
-     * @return \OCP\AppFramework\Db\Entity
+     * @return Entity
      * @throws ServiceConflictException
      */
     public function create($uid, $qid)
@@ -55,9 +64,16 @@ class QuotaMappingService
 
     }
 
+    /**
+     * @param $id
+     * @return Entity
+     * @throws DoesNotExistException
+     * @throws MultipleObjectsReturnedException
+     */
     public function delete($id)
     {
-        return $this->mapper->delete($id);
+        $quotaMapping = $this->find($id);
+        return $this->mapper->delete($quotaMapping);
     }
 
     public function update($id, $uid, $qid)

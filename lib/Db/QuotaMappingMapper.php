@@ -23,12 +23,18 @@ class QuotaMappingMapper extends Mapper
             QuotaMapping::class );
     }
 
+    /**
+     * @param $id
+     * @return \OCP\AppFramework\Db\Entity
+     * @throws \OCP\AppFramework\Db\DoesNotExistException
+     * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException
+     */
     public function find($id)
     {
         $sql = 'SELECT * FROM `*PREFIX*news_quota_mappings`' .
             'WHERE `id` = ?';
 
-        return $this->findEntities($sql, [$id]);
+        return $this->findEntity($sql, [$id]);
     }
 
     public function findAll()
@@ -43,14 +49,6 @@ class QuotaMappingMapper extends Mapper
         $sql = 'SELECT * FROM `*PREFIX*news_quota_mappings`' .
             'WHERE `uid` = ?';
 
-        return $this->findEntities($sql, [$id]);
-    }
-
-    public function delete($id)
-    {
-        $sql = 'DELETE FROM `*PREFIX*news_quota_mappings`' .
-            'WHERE `id` = ?';
-
-        return $this->execute($sql, [$id]);
+        return $this->findEntity($sql, [$id]);
     }
 }
