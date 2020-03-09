@@ -51,7 +51,17 @@ class QuotamappingController extends Controller
      */
     public function show(int $id)
     {
-        return $this->service->find($id);
+        try
+        {
+            return $this->service->find($id);
+        } catch (DoesNotExistException $e)
+        {
+            return $this->error($e, Http::STATUS_NOT_FOUND);
+
+        } catch (MultipleObjectsReturnedException $e)
+        {
+            return $this->error($e, Http::STATUS_CONFLICT);
+        }
     }
 
     /**
